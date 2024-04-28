@@ -1,6 +1,4 @@
 import pytest
-
-from typing import Any, Callable
 from strict import strict
 
 
@@ -41,3 +39,12 @@ def test_concat_with_incorrect_types():
 
 #    assert no_annotations(3, 5) == 8
 #    assert no_annotations('Hello, ', 'world!') == 'Hello, world!'
+
+def test_add_with_correct_types_kwargs():
+    assert add(a=3, b=5) == 8
+
+
+def test_add_with_incorrect_types_kwargs():
+    with pytest.raises(TypeError) as exc_info:
+        add(b=3, a='5')
+    assert str(exc_info.value) == "Argument a must be of type <class 'int'>"
