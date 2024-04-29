@@ -77,3 +77,17 @@ def test_appearance_my_zero_intersection():
 
     test_answer = appearance(test['intervals'])
     assert test_answer == test['answer']
+
+
+def test_appearance_my_3():
+    test = {
+        'intervals': {
+            'lesson': [0, 9],
+            'pupil': [0, 0, 1, 1, 2, 2, 9, 9],
+            'tutor': [0, 9],
+        },
+        'answer': 0,
+    }
+
+    test_answer = appearance(test['intervals'])
+    assert test_answer == test['answer']
