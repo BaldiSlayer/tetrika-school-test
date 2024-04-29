@@ -42,3 +42,15 @@ for animal in animals:
     if first_letter in RUSSIAN_UPPERCASE_LETTERS:
         data[first_letter] = data.get(first_letter, 0) + 1
 ```
+
+# Примечание 3
+
+Я не сортировал буквы при их записи в `csv` файл, но это можно было сделать например так:
+
+```python
+def save_result_to_csv(data: dict[str, int], filename: str = "beasts.csv") -> None:
+    with open(filename, "w", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        for item in sorted(data.items()):
+            writer.writerow(item)
+```
