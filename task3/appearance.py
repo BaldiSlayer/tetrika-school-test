@@ -39,7 +39,7 @@ def appearance(intervals: dict[str, list[int]]) -> int:
             current_period_start = timestamp
 
         # the current period is over
-        if (pupil_count < 1 or tutor_count < 1) and current_period_start != -1:
+        if (pupil_count == 0 or tutor_count == 0) and current_period_start != -1:
             total_time += timestamp - current_period_start
             current_period_start = -1
 
