@@ -4,10 +4,12 @@ from typing import Optional
 import requests
 from bs4 import BeautifulSoup
 
+
 BASE_URL = "https://ru.wikipedia.org"
 FIRST_URL = "/wiki/Категория:Животные_по_алфавиту"
 NEXT_PAGE_SIGN = "Следующая страница"
 NON_BREAKING_SPACE = '\u00A0'
+BEASTS_ON_PAGE = 200
 
 
 def save_result_to_csv(data: dict[str, int], filename: str = "beasts.csv") -> None:
@@ -17,9 +19,14 @@ def save_result_to_csv(data: dict[str, int], filename: str = "beasts.csv") -> No
             writer.writerow(item)
 
 
-def page_to_bs_object(url: str) -> BeautifulSoup:
-    page_content = requests.get(url).text
-    return BeautifulSoup(page_content, "lxml")
+def page_to_bs_object(url: str) -> Optional[BeautifulSoup]:
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return None
+
+    page_content = response.text
+    return BeautifulSoup(page_content, "html.parser")
 
 
 def get_animals_from_page(soup: BeautifulSoup) -> list[str]:
@@ -52,8 +59,10 @@ def get_pages_count(soup: BeautifulSoup) -> Optional[int]:
 
     paragraph_text = paragraph.text
 
+    # taking out a number, it is located between the word "из " and the symbol ","
     count = int(paragraph_text[paragraph_text.find('из ') + 3:paragraph_text.find(',')].replace(NON_BREAKING_SPACE, ''))
-    return math.ceil(count / 200)
+
+    return math.ceil(count / BEASTS_ON_PAGE)
 
 
 def beasts_parser(start_url: str, debug: bool = True) -> dict[str, int]:
@@ -63,6 +72,11 @@ def beasts_parser(start_url: str, debug: bool = True) -> dict[str, int]:
 
     while True:
         page = page_to_bs_object(BASE_URL + current_url)
+
+        if page is None:
+            print(f'Error occurred while fetching page: {BASE_URL + current_url}')
+            break
+
         animals = get_animals_from_page(page)
 
         for animal in animals:
@@ -75,10 +89,15 @@ def beasts_parser(start_url: str, debug: bool = True) -> dict[str, int]:
 
         if debug:
             pages_count = get_pages_count(page)
+
+            if pages_count is None:
+                print(f'Error occurred while trying to get pages count')
+
             page_number += 1
             print(f'Parsed {page_number}/{pages_count} pages')
 
     if debug:
+        print(f'Parsed {page_number+1}/{page_number+1} pages')
         print(data)
 
     return data
