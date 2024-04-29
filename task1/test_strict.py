@@ -1,5 +1,6 @@
 import pytest
 from strict import strict
+from mismatched_error import ParameterMismatchError
 
 
 @strict
@@ -76,3 +77,24 @@ def test_add_float_with_incorrect_types_str():
     with pytest.raises(TypeError) as exc_info:
         add_float(3.0, '5')
     assert str(exc_info.value) == "Argument b must be of type <class 'float'>"
+
+
+def test_non_existent_kwarg():
+    with pytest.raises(TypeError) as exc_info:
+        add_float(a=3.0, e='5')
+    assert str(exc_info.value) == "Argument e it is not parameter of a add_float function"
+
+
+@strict
+def variadic(*args: int):
+    return sum(args)
+
+
+def test_variadic():
+    with pytest.raises(ParameterMismatchError) as exc_info:
+        variadic(1, 2, 3)
+    assert str(exc_info.value) == "The number of parameters does not match"
+
+
+def test_none_type_return():
+    variadic(1)

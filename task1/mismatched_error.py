@@ -1,0 +1,2 @@
+class ParameterMismatchError(Exception):
+    pass
