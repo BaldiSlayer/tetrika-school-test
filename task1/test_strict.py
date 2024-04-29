@@ -32,14 +32,6 @@ def test_concat_with_incorrect_types():
     assert str(exc_info.value) == "Argument b must be of type <class 'str'>"
 
 
-# def test_strict_decorator_with_no_annotations():
-#    @strict
-#    def no_annotations(a: Any, b: Any) -> Any:
-#        return a + b
-
-#    assert no_annotations(3, 5) == 8
-#    assert no_annotations('Hello, ', 'world!') == 'Hello, world!'
-
 def test_add_with_correct_types_kwargs():
     assert add(a=3, b=5) == 8
 
