@@ -52,11 +52,11 @@ def test_add_with_incorrect_types_kwargs():
     assert str(exc_info.value) == "Argument a must be of type <class 'int'>"
 
 
-def test_equal_with_correct_types_kwargs():
+def test_equal_with_correct_types_args():
     assert equal(True, True)
 
 
-def test_equal_with_incorrect_types_kwargs():
+def test_equal_with_incorrect_types_args():
     with pytest.raises(TypeError) as exc_info:
         equal(1, True)
     assert str(exc_info.value) == "Argument a must be of type <class 'bool'>"
