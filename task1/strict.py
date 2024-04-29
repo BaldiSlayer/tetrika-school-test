@@ -25,8 +25,9 @@ def strict(func):
                 raise TypeError(f'Argument {arg_name} must be of type {signature_arguments[arg_name].annotation}')
 
         result = func(*args, **kwargs)
-        return_type = func.__annotations__.get('return')
 
+        # checking the type of the returned value
+        return_type = func.__annotations__.get('return')
         if return_type and not isinstance(result, return_type):
             raise TypeError(f'Type of result is {type(result)} and not {return_type}')
 
