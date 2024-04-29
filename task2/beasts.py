@@ -40,7 +40,7 @@ def get_animals_from_page(soup: BeautifulSoup) -> list[str]:
 def get_next_page_url(soup: BeautifulSoup) -> Optional[str]:
     link = soup.find("a", string=NEXT_PAGE_SIGN)
 
-    if link is None:
+    if not link:
         return None
 
     return link.get("href")
