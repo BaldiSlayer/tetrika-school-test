@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from solution import get_animals_from_page
+from beasts import get_animals_from_page
 
 
 def test_get_animals_from_page():

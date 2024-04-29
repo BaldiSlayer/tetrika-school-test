@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from solution import get_pages_count
+from beasts import get_pages_count
 
 
 def test_get_count_from_page():
