@@ -10,11 +10,11 @@
 
 ## Задачи
 
-[Задача 1](https://gist.github.com/CaerDarrow/4481a7d980e977f1afcf73ec35658d66)
+[Задача 1](https://github.com/BaldiSlayer/tetrika-school-test/blob/main/task1/README.md)
 
-[Задача 2](https://gist.github.com/CaerDarrow/64bc5d09d30be49c28ba8794265eca34)
+[Задача 2](https://github.com/BaldiSlayer/tetrika-school-test/blob/main/task2/README.md)
 
-[Задача 3](https://gist.github.com/CaerDarrow/4cfd869cfc54a62c6221c5eecb93435e)
+[Задача 3](https://github.com/BaldiSlayer/tetrika-school-test/blob/main/task3/README.md)
 
 ## Решение
 
