@@ -1,8 +1,8 @@
-freeze-requirements:
+freeze:
 	pip3 freeze > requirements.txt
 
-install-requirements:
+install:
 	pip3 install -r requirements.txt
 
-start-tests:
+test:
 	pytest
