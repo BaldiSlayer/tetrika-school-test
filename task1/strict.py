@@ -19,9 +19,3 @@ def strict(func):
         return func(*args, **kwargs)
 
     return wrapper
-
-
-@strict
-def sum_two(a: int, b: int) -> int:
-    return a + b
-
