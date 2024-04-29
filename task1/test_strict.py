@@ -12,6 +12,16 @@ def concat(a: str, b: str) -> str:
     return a + b
 
 
+@strict
+def equal(a: bool, b: bool) -> bool:
+    return a == b
+
+
+@strict
+def add_float(a: float, b: float) -> float:
+    return a + b
+
+
 def test_add_with_correct_types():
     assert add(3, 5) == 8
 
@@ -40,3 +50,29 @@ def test_add_with_incorrect_types_kwargs():
     with pytest.raises(TypeError) as exc_info:
         add(b=3, a='5')
     assert str(exc_info.value) == "Argument a must be of type <class 'int'>"
+
+
+def test_equal_with_correct_types_kwargs():
+    assert equal(True, True)
+
+
+def test_equal_with_incorrect_types_kwargs():
+    with pytest.raises(TypeError) as exc_info:
+        equal(1, True)
+    assert str(exc_info.value) == "Argument a must be of type <class 'bool'>"
+
+
+def test_add_float_with_correct_types():
+    assert add_float(3.0, 5.0) == 8.0
+
+
+def test_add_float_with_incorrect_types_int():
+    with pytest.raises(TypeError) as exc_info:
+        add_float(3, '5')
+    assert str(exc_info.value) == "Argument a must be of type <class 'float'>"
+
+
+def test_add_float_with_incorrect_types_str():
+    with pytest.raises(TypeError) as exc_info:
+        add_float(3.0, '5')
+    assert str(exc_info.value) == "Argument b must be of type <class 'float'>"
