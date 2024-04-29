@@ -47,6 +47,10 @@ def get_next_page_url(soup: BeautifulSoup) -> Optional[str]:
 
 
 def get_pages_count(soup: BeautifulSoup) -> Optional[int]:
+    """
+    Gets the total number of animal records from the page and calculates the total number of animal pages based on them.
+    Needed for logs
+    """
     mw_pages_div = soup.find('div', {'id': 'mw-pages'})
 
     if mw_pages_div is None:
@@ -66,6 +70,16 @@ def get_pages_count(soup: BeautifulSoup) -> Optional[int]:
 
 
 def beasts_parser(start_url: str, debug: bool = True) -> dict[str, int]:
+    """
+    Gets the number of animals for each of the letters of the alphabet
+
+    Parameters:
+    start_url (str): the link from which the parsing will begin
+    debug (bool): enabling/disabling logs
+
+    Return value:
+    dict[str, int]: A dictionary of the number of animals for each letter of the alphabet
+    """
     data = {}
     current_url = start_url
     page_number = 0
