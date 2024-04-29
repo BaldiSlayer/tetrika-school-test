@@ -23,6 +23,11 @@ def add_float(a: float, b: float) -> float:
     return a + b
 
 
+@strict
+def variadic(*args: int):
+    return sum(args)
+
+
 def test_add_with_correct_types():
     assert add(3, 5) == 8
 
@@ -83,11 +88,6 @@ def test_non_existent_kwarg():
     with pytest.raises(TypeError) as exc_info:
         add_float(a=3.0, e='5')
     assert str(exc_info.value) == "Argument e it is not parameter of a add_float function"
-
-
-@strict
-def variadic(*args: int):
-    return sum(args)
 
 
 def test_variadic():
