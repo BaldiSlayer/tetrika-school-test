@@ -1,6 +1,6 @@
 import pytest
 from strict import strict
-from mismatched_error import ParameterMismatchError
+from parameter_mismatch_error import ParameterMismatchError
 
 
 @strict

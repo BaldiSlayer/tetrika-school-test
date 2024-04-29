@@ -1,6 +1,6 @@
 import inspect
 from functools import wraps
-from mismatched_error import ParameterMismatchError
+from parameter_mismatch_error import ParameterMismatchError
 
 
 def strict(func):
