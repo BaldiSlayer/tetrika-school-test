@@ -53,12 +53,12 @@ def get_pages_count(soup: BeautifulSoup) -> Optional[int]:
     """
     mw_pages_div = soup.find('div', {'id': 'mw-pages'})
 
-    if mw_pages_div is None:
+    if not mw_pages_div:
         return None
 
     paragraph = mw_pages_div.find("p")
 
-    if paragraph is None:
+    if not paragraph:
         return None
 
     paragraph_text = paragraph.text
@@ -87,7 +87,7 @@ def beasts_parser(start_url: str, debug: bool = True) -> dict[str, int]:
     while True:
         page = page_to_bs_object(BASE_URL + current_url)
 
-        if page is None:
+        if not page:
             print(f'Error occurred while fetching page: {BASE_URL + current_url}')
             break
 
@@ -98,13 +98,13 @@ def beasts_parser(start_url: str, debug: bool = True) -> dict[str, int]:
             data[first_letter] = data.get(first_letter, 0) + 1
 
         current_url = get_next_page_url(page)
-        if current_url is None:
+        if not current_url:
             break
 
         if debug:
             pages_count = get_pages_count(page)
 
-            if pages_count is None:
+            if not pages_count:
                 print(f'Error occurred while trying to get pages count')
 
             page_number += 1
