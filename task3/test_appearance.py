@@ -1,3 +1,4 @@
+import pytest
 from appearance import appearance
 
 
@@ -91,3 +92,76 @@ def test_appearance_my_3():
 
     test_answer = appearance(test['intervals'])
     assert test_answer == test['answer']
+
+
+def test_appearance_my_pupil_empty():
+    test = {
+        'intervals': {
+            'lesson': [0, 9],
+            'pupil': [],
+            'tutor': [0, 9],
+        },
+        'answer': 0,
+    }
+
+    test_answer = appearance(test['intervals'])
+    assert test_answer == test['answer']
+
+
+def test_appearance_my_tutor_empty():
+    test = {
+        'intervals': {
+            'lesson': [0, 9],
+            'pupil': [0, 9],
+            'tutor': [],
+        },
+        'answer': 0,
+    }
+
+    test_answer = appearance(test['intervals'])
+    assert test_answer == test['answer']
+
+
+def test_appearance_my_lesson_empty():
+    test = {
+        'intervals': {
+            'lesson': [],
+            'pupil': [0, 0, 1, 1, 2, 2, 9, 9],
+            'tutor': [0, 9],
+        },
+        'answer': 0,
+    }
+
+    with pytest.raises(ValueError) as exc_info:
+        appearance(test['intervals'])
+
+    assert str(exc_info.value) == "intervals must be not None and have keys 'lesson', 'pupil' and 'tutor'"
+
+
+def test_appearance_my_lesson_none():
+    test = {
+        'intervals': {
+
+        },
+        'answer': 0,
+    }
+
+    with pytest.raises(ValueError) as exc_info:
+        appearance(test['intervals'])
+
+    assert str(exc_info.value) == "intervals must be not None and have keys 'lesson', 'pupil' and 'tutor'"
+
+
+def test_appearance_my_lesson_none_lesson():
+    test = {
+        'intervals': {
+            'pupil': [0, 0, 1, 1, 2, 2, 9, 9],
+            'tutor': [0, 9],
+        },
+        'answer': 0,
+    }
+
+    with pytest.raises(ValueError) as exc_info:
+        appearance(test['intervals'])
+
+    assert str(exc_info.value) == "intervals must be not None and have keys 'lesson', 'pupil' and 'tutor'"
