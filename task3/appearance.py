@@ -19,6 +19,9 @@ def appearance(intervals: dict[str, list[int]]) -> int:
         """
         return min(max(time, lesson_start), lesson_end), 1 - 2 * (ind % 2), user_type
 
+    if not intervals or not intervals.get('lesson') or 'pupil' not in intervals or 'tutor' not in intervals:
+        raise ValueError("intervals must be not None and have keys 'lesson', 'pupil' and 'tutor'")
+
     lesson_start, lesson_end = intervals['lesson']
     pupil = [construct_event(ind, time, 'pupil') for ind, time in enumerate(intervals['pupil'])]
     tutor = [construct_event(ind, time, 'tutor') for ind, time in enumerate(intervals['tutor'])]
